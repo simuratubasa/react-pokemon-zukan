@@ -6,13 +6,30 @@ const Navigation: React.FC = () => {
   const pathname = window.location.pathname;
 
   return (
-    <nav className="bg-gray-100 p-4">
-      <ul className="flex space-x-4">
+    <nav style={{
+      backgroundColor: '#f3f4f6',
+      padding: '1rem'
+    }}>
+      <ul style={{
+        display: 'flex',
+        gap: '1rem',
+        listStyle: 'none',
+        margin: 0,
+        padding: 0
+      }}>
         {/* 一覧画面の場合は一覧ボタンを非表示 */}
         {
-          pathname !== '/' && (
+          pathname !== '/' && pathname !== '/react-pokemon-zukan/' && (
             <li>
-              <Link to="/" className="text-blue-500 hover:underline text-decoration-none">{"< "}一覧</Link>
+              <Link 
+                to="/" 
+                style={{
+                  color: '#3b82f6',
+                  textDecoration: 'none'
+                }}
+              >
+                {"< "}一覧
+              </Link>
             </li>
           )
         }

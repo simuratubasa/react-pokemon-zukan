@@ -9,10 +9,14 @@ import './App.css';
 
 const App: React.FC = () => {
   return (
-    <div className="app-container">
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: '100vh'
+    }}>
       <Header />
       <Navigation />
-      <main className="flex-grow">
+      <main style={{ flex: 1, padding: '1rem' }}>
         <Routes>
           <Route path="/" element={<PokemonList />} />
           <Route path="/pokemon/:id" element={<PokemonDetail />} />

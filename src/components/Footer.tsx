@@ -3,8 +3,14 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-200 text-center p-4 mt-8">
-      <p>&copy; 2024 Reactポケモン図鑑</p>
+    <footer style={{
+      backgroundColor: '#1f2937',
+      color: 'white',
+      textAlign: 'center',
+      padding: '1rem',
+      marginTop: 'auto'
+    }}>
+      <p>&copy; 2025 Reactポケモン図鑑</p>
     </footer>
   );
 };

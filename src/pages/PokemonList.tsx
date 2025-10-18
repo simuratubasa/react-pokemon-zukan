@@ -49,15 +49,27 @@ const PokemonList: React.FC = () => {
   if (status === 'error') return <div>エラーが発生しました</div>;
 
   return (
-    <div className="p-4">
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+    <div style={{ padding: '1rem' }}>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+        gap: '1rem'
+      }}>
         {data?.pages.map((page) =>
           page.results.map((pokemon: PokemonWithJapaneseName) => (
             <PokemonCard key={pokemon.name} pokemon={pokemon} />
           ))
         )}
       </div>
-      <div ref={loadMoreRef} className="h-20 flex items-center justify-center">
+      <div 
+        ref={loadMoreRef} 
+        style={{
+          height: '5rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
         {isFetchingNextPage ? <Loader /> : hasNextPage ? '続きを読み込む' : ''}
       </div>
     </div>
@@ -66,22 +78,50 @@ const PokemonList: React.FC = () => {
 
 // ローダーコンポーネント
 const Loader: React.FC = () => (
-  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-900"></div>
+  <div style={{
+    animation: 'spin 1s linear infinite',
+    borderRadius: '50%',
+    height: '1.5rem',
+    width: '1.5rem',
+    borderBottom: '2px solid #111827'
+  }}>
+    <style>
+      {`
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+      `}
+    </style>
+  </div>
 );
 
 const PokemonListSkeleton: React.FC = () => {
   return (
-    <div className="p-4">
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+    <div style={{ padding: '1rem' }}>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+        gap: '1rem'
+      }}>
         {[...Array(18)].map((_, index) => (
-          <div key={index} className="bg-white shadow-md rounded-lg p-4">
+          <div key={index} style={{
+            backgroundColor: 'white',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+            borderRadius: '0.5rem',
+            padding: '1rem'
+          }}>
             <Skeleton height={120} />
             <Skeleton width={80} height={20} className="mt-2" />
             <Skeleton width={100} height={16} className="mt-1" />
           </div>
         ))}
       </div>
-      <div className="h-10 flex items-center justify-center">
+      <div style={{
+        height: '2.5rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
         <Skeleton width={100} height={20} />
       </div>
     </div>
