@@ -5,10 +5,11 @@ import PokemonDetail from './pages/PokemonDetail';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
+import './App.css';
 
 const App: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="app-container">
       <Header />
       <Navigation />
       <main className="flex-grow">
