@@ -11,10 +11,17 @@ const PokemonTypeLabel: React.FC<PokemonTypeLabelProps> = ({ type }) => {
   return (
     <span 
       style={{
-        backgroundColor: typeInfo?.color,
+        backgroundColor: typeInfo?.color || '#6b7280',
+        color: 'white',
+        padding: '0.25rem 0.75rem',
+        borderRadius: '9999px',
+        width: 'fit-content',
+        fontSize: '0.875rem',
+        fontWeight: '500',
+        textAlign: 'center',
+        display: 'inline-block'
       }}
       key={type}
-      className={`text-white px-3 py-1 rounded-full w-fit`}
     >
       {typeInfo?.jaType}
     </span>

@@ -22,59 +22,260 @@ const PokemonDetail: React.FC = () => {
   }, [data])
 
   if (isLoading) return <PokemonDetailSkeleton />;
-  if (error instanceof Error) return <div>エラー: {error.message}</div>;
-  if (!data) return <div>ポケモンが見つかりません</div>;
+  if (error instanceof Error) return (
+    <div style={{
+      padding: '2rem',
+      textAlign: 'center',
+      color: '#dc2626',
+      fontSize: '1.125rem'
+    }}>
+      エラー: {error.message}
+    </div>
+  );
+  if (!data) return (
+    <div style={{
+      padding: '2rem',
+      textAlign: 'center',
+      color: '#6b7280',
+      fontSize: '1.125rem'
+    }}>
+      ポケモンが見つかりません
+    </div>
+  );
 
   return (
-    <div className="p-4 max-w-[400px] m-auto">
-      <Link to="/" className="px-4 py-2 bg-blue-500 text-white rounded-md mb-4">← 一覧に戻る</Link>
-      <div className="mt-4 bg-white shadow-md rounded p-8 flex flex-col items-center gap-4">
-        <img src={data.image} alt={data.japaneseName} className="w-40 h-40" />
-        <h1 className="mt-4 text-2xl font-bold">{data.japaneseName} (#{data.id})</h1>
-        <p className="mt-2 text-justify">{data.description}</p>
-        <div className="grid grid-cols-2 gap-2">
+    <div style={{
+      padding: '1rem',
+      maxWidth: '400px',
+      margin: '0 auto'
+    }}>
+      <Link 
+        to="/" 
+        style={{
+          display: 'inline-block',
+          padding: '0.5rem 1rem',
+          backgroundColor: '#3b82f6',
+          color: 'white',
+          borderRadius: '0.375rem',
+          marginBottom: '1rem',
+          textDecoration: 'none'
+        }}
+      >
+        ← 一覧に戻る
+      </Link>
+      <div style={{
+        marginTop: '1rem',
+        backgroundColor: 'white',
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+        borderRadius: '0.5rem',
+        padding: '2rem',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '1rem'
+      }}>
+        <img 
+          src={data.image} 
+          alt={data.japaneseName} 
+          style={{
+            width: '10rem',
+            height: '10rem',
+            objectFit: 'contain'
+          }}
+        />
+        <h1 style={{
+          marginTop: '1rem',
+          fontSize: '1.5rem',
+          fontWeight: '700',
+          textAlign: 'center',
+          margin: 0
+        }}>
+          {data.japaneseName} (#{data.id})
+        </h1>
+        <p style={{
+          marginTop: '0.5rem',
+          textAlign: 'justify',
+          lineHeight: '1.6',
+          margin: '0.5rem 0'
+        }}>
+          {data.description}
+        </p>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+          gap: '0.5rem',
+          width: '100%'
+        }}>
           {data?.types?.map((type) => (
             <PokemonTypeLabel key={type} type={type} />
           ))}
         </div>
-          <span className="w-fit whitespace-nowrap text-right">特性</span>
-        <div className="flex gap-2">
-          <div className="grid grid-cols-2 gap-2 w-full">
+        <div style={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.5rem'
+        }}>
+          <span style={{
+            width: 'fit-content',
+            whiteSpace: 'nowrap',
+            fontWeight: '600'
+          }}>
+            特性
+          </span>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gap: '0.5rem',
+            width: '100%'
+          }}>
             {data?.abilities?.map((ability) => (
-              <span key={ability}>{ability}</span>
+              <span 
+                key={ability}
+                style={{
+                  padding: '0.25rem 0.5rem',
+                  backgroundColor: '#f3f4f6',
+                  borderRadius: '0.25rem',
+                  fontSize: '0.875rem'
+                }}
+              >
+                {ability}
+              </span>
             ))}
           </div>
         </div>
-        <div className="mt-4 grid grid-cols-1 gap-x-2 w-full">
+        <div style={{
+          marginTop: '1rem',
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          gap: '0.5rem',
+          width: '100%'
+        }}>
           {data?.baseStats?.map((stat) => (
-            <div key={stat.name} className="flex items-center">
-              <span className="w-24 text-right mr-2">{stat.name}</span>
-              <div className="flex-1 bg-gray-200 rounded-full h-4">
+            <div 
+              key={stat.name} 
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}
+            >
+              <span style={{
+                width: '6rem',
+                textAlign: 'right',
+                fontSize: '0.875rem',
+                fontWeight: '500'
+              }}>
+                {stat.name}
+              </span>
+              <div style={{
+                flex: 1,
+                backgroundColor: '#e5e7eb',
+                borderRadius: '9999px',
+                height: '1rem',
+                overflow: 'hidden'
+              }}>
                 <div
-                  className="bg-blue-600 rounded-full h-4"
-                  style={{ width: `${(stat.value / 255) * 100}%` }}
+                  style={{
+                    backgroundColor: '#2563eb',
+                    borderRadius: '9999px',
+                    height: '100%',
+                    width: `${(stat.value / 255) * 100}%`,
+                    transition: 'width 0.3s ease'
+                  }}
                 ></div>
               </div>
-              <span className="ml-2 w-8">{stat.value}</span>
+              <span style={{
+                marginLeft: '0.5rem',
+                width: '2rem',
+                textAlign: 'right',
+                fontSize: '0.875rem',
+                fontWeight: '600'
+              }}>
+                {stat.value}
+              </span>
             </div>
           ))}
           {/* 合計種族値 */}
-          <div className="flex items-center">
-            <span className="w-24 text-right mr-2">合計</span>
-            <div className="flex-1 bg-gray-200 rounded-full h-4">
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            borderTop: '1px solid #e5e7eb',
+            paddingTop: '0.5rem',
+            marginTop: '0.5rem'
+          }}>
+            <span style={{
+              width: '6rem',
+              textAlign: 'right',
+              fontSize: '0.875rem',
+              fontWeight: '700'
+            }}>
+              合計
+            </span>
+            <div style={{
+              flex: 1,
+              backgroundColor: '#e5e7eb',
+              borderRadius: '9999px',
+              height: '1rem',
+              overflow: 'hidden'
+            }}>
               <div
-                className="bg-blue-600 rounded-full h-4"
-                style={{ width: `${(data?.baseStats?.reduce((sum, stat) => sum + stat.value, 0) / 780) * 100}%` }}
+                style={{
+                  backgroundColor: '#2563eb',
+                  borderRadius: '9999px',
+                  height: '100%',
+                  width: `${(data?.baseStats?.reduce((sum, stat) => sum + stat.value, 0) / 780) * 100}%`,
+                  transition: 'width 0.3s ease'
+                }}
               ></div>
             </div>
-            <span className="ml-2 w-8">{data?.baseStats?.reduce((sum, stat) => sum + stat.value, 0)}</span>
+            <span style={{
+              marginLeft: '0.5rem',
+              width: '2rem',
+              textAlign: 'right',
+              fontSize: '0.875rem',
+              fontWeight: '700'
+            }}>
+              {data?.baseStats?.reduce((sum, stat) => sum + stat.value, 0)}
+            </span>
           </div>
         </div>
       </div>
-      <div className="mt-4 flex justify-between">
+      <div style={{
+        marginTop: '1rem',
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}>
         {/* 0は前へがないので非表示 */}
-        {Number(id) !== 1 ? <Link to={`/pokemon/${Number(id) - 1}`} className="px-4 py-2 bg-blue-500 text-white rounded-md">前へ</Link> : <span />}
-        <Link to={`/pokemon/${Number(id) + 1}`} className="px-4 py-2 bg-blue-500 text-white rounded-md">次へ</Link>
+        {Number(id) !== 1 ? (
+          <Link 
+            to={`/pokemon/${Number(id) - 1}`} 
+            style={{
+              padding: '0.5rem 1rem',
+              backgroundColor: '#3b82f6',
+              color: 'white',
+              borderRadius: '0.375rem',
+              textDecoration: 'none'
+            }}
+          >
+            前へ
+          </Link>
+        ) : (
+          <span></span>
+        )}
+        <Link 
+          to={`/pokemon/${Number(id) + 1}`} 
+          style={{
+            padding: '0.5rem 1rem',
+            backgroundColor: '#3b82f6',
+            color: 'white',
+            borderRadius: '0.375rem',
+            textDecoration: 'none'
+          }}
+        >
+          次へ
+        </Link>
       </div>
     </div>
   );
@@ -82,34 +283,83 @@ const PokemonDetail: React.FC = () => {
 
 const PokemonDetailSkeleton: React.FC = () => {
   return (
-    <div className="p-4 max-w-[400px] m-auto">
-      <div className="px-4 py-2 bg-blue-500 text-white rounded-md mb-4 w-24">
+    <div style={{
+      padding: '1rem',
+      maxWidth: '400px',
+      margin: '0 auto'
+    }}>
+      <div style={{
+        padding: '0.5rem 1rem',
+        backgroundColor: '#3b82f6',
+        color: 'white',
+        borderRadius: '0.375rem',
+        marginBottom: '1rem',
+        width: '6rem',
+        height: '2.5rem'
+      }}>
         <Skeleton />
       </div>
-      <div className="mt-4 bg-white shadow-md rounded p-8 flex flex-col items-center gap-4">
+      <div style={{
+        marginTop: '1rem',
+        backgroundColor: 'white',
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+        borderRadius: '0.5rem',
+        padding: '2rem',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '1rem'
+      }}>
         <Skeleton circle={true} width={160} height={160} />
         <Skeleton width={200} height={24} />
         <Skeleton width={300} height={60} />
-        <div className="grid grid-cols-2 gap-2 w-full">
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+          gap: '0.5rem',
+          width: '100%'
+        }}>
           <Skeleton width={100} height={24} />
           <Skeleton width={100} height={24} />
         </div>
-        <div className="grid grid-cols-2 gap-2 w-full">
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+          gap: '0.5rem',
+          width: '100%'
+        }}>
           <Skeleton width={100} height={24} />
           <Skeleton width={100} height={24} />
         </div>
-        <div className="mt-4 grid grid-cols-1 gap-x-2 w-full">
+        <div style={{
+          marginTop: '1rem',
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          gap: '0.5rem',
+          width: '100%'
+        }}>
           {[...Array(6)].map((_, index) => (
-            <div key={index} className="flex items-center">
+            <div 
+              key={index} 
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}
+            >
               <Skeleton width={60} height={20} />
-              <div className="flex-1 ml-2">
+              <div style={{ flex: 1, marginLeft: '0.5rem' }}>
                 <Skeleton height={20} />
               </div>
             </div>
           ))}
         </div>
       </div>
-      <div className="mt-4 flex justify-between">
+      <div style={{
+        marginTop: '1rem',
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}>
         <Skeleton width={80} height={36} />
         <Skeleton width={80} height={36} />
       </div>
