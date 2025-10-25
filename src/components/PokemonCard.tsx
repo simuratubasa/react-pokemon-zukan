@@ -28,13 +28,16 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
         flexDirection: 'column',
         alignItems: 'center',
         transition: 'box-shadow 0.15s ease-in-out',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        position: 'relative'
       }}>
         <p style={{
           fontSize: '0.875rem',
           color: '#6b7280',
-          marginRight: 'auto',
-          margin: '0 0 0.5rem 0'
+          margin: 0,
+          position: 'absolute',
+          top: '0.5rem',
+          left: '0.5rem'
         }}>
           No. {pokemon.number}
         </p>

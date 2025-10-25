@@ -46,23 +46,12 @@ const PokemonDetail: React.FC = () => {
   return (
     <div style={{
       padding: '1rem',
-      maxWidth: '400px',
-      margin: '0 auto'
+      maxWidth: '500px',
+      margin: '0 auto',
+      position: 'relative'
     }}>
-      <Link 
-        to="/" 
-        style={{
-          display: 'inline-block',
-          padding: '0.5rem 1rem',
-          backgroundColor: '#3b82f6',
-          color: 'white',
-          borderRadius: '0.375rem',
-          marginBottom: '1rem',
-          textDecoration: 'none'
-        }}
-      >
-        ← 一覧に戻る
-      </Link>
+      
+ 
       <div style={{
         marginTop: '1rem',
         backgroundColor: 'white',
@@ -133,9 +122,6 @@ const PokemonDetail: React.FC = () => {
               <span 
                 key={ability}
                 style={{
-                  padding: '0.25rem 0.5rem',
-                  backgroundColor: '#f3f4f6',
-                  borderRadius: '0.25rem',
                   fontSize: '0.875rem'
                 }}
               >
@@ -175,16 +161,16 @@ const PokemonDetail: React.FC = () => {
                 height: '1rem',
                 overflow: 'hidden'
               }}>
-                <div
-                  style={{
-                    backgroundColor: '#2563eb',
-                    borderRadius: '9999px',
-                    height: '100%',
-                    width: `${(stat.value / 255) * 100}%`,
-                    transition: 'width 0.3s ease'
-                  }}
-                ></div>
-              </div>
+                  <div
+                    style={{
+                      backgroundColor: '#2563eb',
+                      borderRadius: '9999px',
+                      height: '100%',
+                      width: `${(stat.value / 255) * 100}%`,
+                      transition: 'width 0.3s ease'
+                    }}
+                  ></div>
+                </div>
               <span style={{
                 marginLeft: '0.5rem',
                 width: '2rem',
@@ -241,16 +227,33 @@ const PokemonDetail: React.FC = () => {
             </span>
           </div>
         </div>
-      </div>
-      <div style={{
-        marginTop: '1rem',
-        display: 'flex',
-        justifyContent: 'space-between'
-      }}>
-        {/* 0は前へがないので非表示 */}
-        {Number(id) !== 1 ? (
+        
+        {/* ナビゲーションボタン */}
+        <div style={{
+          marginTop: '1rem',
+          display: 'flex',
+          justifyContent: 'space-between',
+          gap: '3rem',
+          width: '100%'
+        }}>
+          <div>
+            {Number(id) !== 1 && (
+              <Link 
+                to={`/pokemon/${Number(id) - 1}`} 
+                style={{
+                  padding: '0.5rem 1rem',
+                  backgroundColor: '#3b82f6',
+                  color: 'white',
+                  borderRadius: '0.375rem',
+                  textDecoration: 'none'
+                }}
+              >
+                前へ
+              </Link>
+            )}
+          </div>
           <Link 
-            to={`/pokemon/${Number(id) - 1}`} 
+            to={`/pokemon/${Number(id) + 1}`} 
             style={{
               padding: '0.5rem 1rem',
               backgroundColor: '#3b82f6',
@@ -259,23 +262,9 @@ const PokemonDetail: React.FC = () => {
               textDecoration: 'none'
             }}
           >
-            前へ
+            次へ
           </Link>
-        ) : (
-          <span></span>
-        )}
-        <Link 
-          to={`/pokemon/${Number(id) + 1}`} 
-          style={{
-            padding: '0.5rem 1rem',
-            backgroundColor: '#3b82f6',
-            color: 'white',
-            borderRadius: '0.375rem',
-            textDecoration: 'none'
-          }}
-        >
-          次へ
-        </Link>
+        </div>
       </div>
     </div>
   );
@@ -285,7 +274,7 @@ const PokemonDetailSkeleton: React.FC = () => {
   return (
     <div style={{
       padding: '1rem',
-      maxWidth: '400px',
+      maxWidth: '500px',
       margin: '0 auto'
     }}>
       <div style={{

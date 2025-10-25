@@ -49,12 +49,36 @@ const PokemonList: React.FC = () => {
   if (status === 'error') return <div>エラーが発生しました</div>;
 
   return (
-    <div style={{ padding: '1rem' }}>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-        gap: '1rem'
-      }}>
+    <div style={{ padding: '1rem', position: 'relative' }}>
+      <style>
+        {`
+          .responsive-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+          }
+          
+          @media (min-width: 640px) {
+            .responsive-grid {
+              grid-template-columns: repeat(3, 1fr);
+            }
+          }
+          
+          @media (min-width: 768px) {
+            .responsive-grid {
+              grid-template-columns: repeat(4, 1fr);
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .responsive-grid {
+              grid-template-columns: repeat(6, 1fr);
+            }
+          }
+        `}
+      </style>
+      
+      <div className="responsive-grid">
         {data?.pages.map((page) =>
           page.results.map((pokemon: PokemonWithJapaneseName) => (
             <PokemonCard key={pokemon.name} pokemon={pokemon} />
@@ -98,11 +122,34 @@ const Loader: React.FC = () => (
 const PokemonListSkeleton: React.FC = () => {
   return (
     <div style={{ padding: '1rem' }}>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-        gap: '1rem'
-      }}>
+      <style>
+        {`
+          .responsive-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+          }
+          
+          @media (min-width: 640px) {
+            .responsive-grid {
+              grid-template-columns: repeat(3, 1fr);
+            }
+          }
+          
+          @media (min-width: 768px) {
+            .responsive-grid {
+              grid-template-columns: repeat(4, 1fr);
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .responsive-grid {
+              grid-template-columns: repeat(6, 1fr);
+            }
+          }
+        `}
+      </style>
+      <div className="responsive-grid">
         {[...Array(18)].map((_, index) => (
           <div key={index} style={{
             backgroundColor: 'white',

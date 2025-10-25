@@ -8,10 +8,12 @@ import './App.css';
 
 const queryClient = new QueryClient();
 
+const basename = import.meta.env.PROD ? '/react-pokemon-zukan/' : '/';
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter basename="/react-pokemon-zukan/">
+      <BrowserRouter basename={basename}>
         <App />
       </BrowserRouter>
     </QueryClientProvider>
