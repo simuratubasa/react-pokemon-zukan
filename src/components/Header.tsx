@@ -47,11 +47,11 @@ const Header: React.FC = () => {
           to="/" 
           style={{
             position: 'absolute',
-            bottom: '-2.25rem',
+            bottom: '-3rem',
             left: '1rem',
             color: '#3b82f6',
             textDecoration: 'none',
-            fontSize: '0.9rem',
+            fontSize: '1.125rem',
             fontWeight: '500',
             transition: 'color 0.2s ease'
           }}

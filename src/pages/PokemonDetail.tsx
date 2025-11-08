@@ -50,7 +50,35 @@ const PokemonDetail: React.FC = () => {
       margin: '0 auto',
       position: 'relative'
     }}>
-      
+      {/* 一覧に戻るボタン */}
+      <div style={{
+        marginBottom: '1rem'
+      }}>
+        <Link 
+          to="/" 
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            padding: '0.5rem 1rem',
+            backgroundColor: '#3b82f6',
+            color: 'white',
+            borderRadius: '0.375rem',
+            textDecoration: 'none',
+            fontSize: '0.875rem',
+            fontWeight: '500',
+            transition: 'background-color 0.2s ease',
+            border: 'none'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#2563eb';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = '#3b82f6';
+          }}
+        >
+          ← 一覧に戻る
+        </Link>
+      </div>
  
       <div style={{
         marginTop: '1rem',
@@ -92,8 +120,9 @@ const PokemonDetail: React.FC = () => {
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, 1fr)',
-          gap: '0.5rem',
-          width: '100%'
+          gap: '0.25rem',
+          width: '100%',
+          justifyItems: 'center'
         }}>
           {data?.types?.map((type) => (
             <PokemonTypeLabel key={type} type={type} />
@@ -103,11 +132,11 @@ const PokemonDetail: React.FC = () => {
           width: '100%',
           display: 'flex',
           flexDirection: 'column',
-          gap: '0.5rem'
+          gap: '0.25rem'
         }}>
           <span style={{
-            width: 'fit-content',
-            whiteSpace: 'nowrap',
+            width: '100%',
+            textAlign: 'center',
             fontWeight: '600'
           }}>
             特性
@@ -115,8 +144,9 @@ const PokemonDetail: React.FC = () => {
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '0.5rem',
-            width: '100%'
+            gap: '0.25rem',
+            width: '100%',
+            justifyItems: 'center'
           }}>
             {data?.abilities?.map((ability) => (
               <span 
